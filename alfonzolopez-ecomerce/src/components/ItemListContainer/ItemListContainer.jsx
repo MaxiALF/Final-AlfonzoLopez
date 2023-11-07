@@ -1,31 +1,35 @@
-import { useState, useEffect } from "react"
-import { getProducts } from '../../mFetch'
-import ItemList from '../ItemList/ItemList'
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { mFetch } from "../Tools/mFetch"
+import { ItemList } from "../ItemList/ItemList"
 
-const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-
-    const { categoryId } = useParams()
+function ItemListContainer () {
+    const [ products, setProducts ] = useState ([])
+    const [ load, setload ] = useState (true)
+    const { cid } = useParams()
 
     useEffect(() => {
-        const asyncFunc = categoryId ? getProductsByCategory : getProducts
+        if (cid){
+            mFetch()
+            .then (result => setProducts(result.filter(products => products.category === cid)))
+            .catch(error => console.log(error))
+            .finally(() => setload(false))
+        }
+        else{
+            mFetch()
+            .then (result => setProducts(result))
+            .catch(error => console.log(error))
+            .finally(() => setload(false))
+        }
+    }, [cid])
 
-        asyncFunc(categoryId)
-            .then(response => {
-                setProducts(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [categoryId])
-
-    return (
-        <div>
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
-        </div>
-    )
+    return(
+        <>
+            {
+                load ? <h2>Cargando, espere......</h2> :
+                <ItemList products={ products } />
+            }
+        </>
+    ) 
 }
-
 export default ItemListContainer

@@ -1,35 +1,21 @@
-import './ItemCount.css'
-import { useState } from 'react' 
+import { useCount } from "../Hooks/useCount"
 
-const ItemCount = ({stock , initial, onAdd}) => {
-    const [ quantity, setQuantity] = useState (initial)
+export const ItemCount = ({initial=1, stock=12, onAdd}) => {
+    const {counter, handMore, handLess} = useCount(initial, stock)
 
-    const more = () => {
-        if(quantity < stock) {
-            setQuantity(quantity+1)
-        }
+    const handOnAdd = () => {
+        onAdd(counter)
     }
-
-    const less = () => {
-        if(quantity > 1) {
-            setQuantity(quantity-1)
-        }
-    }
-
     return(
-        <div className= 'Counter'>
-            <div className= 'Controls'>
-                <button className= "Button" onClick={less}>-</button>
-                <h4 className= 'Number'>{quantity}</h4>
-                <button className= "Button" onClick={more}>+</button>
+        <div className="text-center">
+            <div>
+                <p>{counter}</p>
             </div>
             <div>
-                <button className= "Button" onClick={() => onAdd(quantity)} disabled={!stock}>
-                    Agregar
-                </button>
+                <button className='btn btn-success' onClick={handMore}>+</button>
+                <button className='btn btn-success' onClick={handLess}>-</button>
+                <button className='btn btn-success' onClick={handOnAdd}>Agregar</button>
             </div>
         </div>
     )
 }
-
-export default ItemCount
