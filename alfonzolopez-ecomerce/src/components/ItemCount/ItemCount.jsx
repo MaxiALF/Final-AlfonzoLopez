@@ -8,13 +8,13 @@ export const ItemCount = ({initial=1, stock=12, onAdd}) => {
     }
     return(
         <div className="text-center">
-            <div>
-                <p>{counter}</p>
+            <div className="d-inline-flex m-2">
+                <button className='btn btn-success' onClick={handLess}>-</button>
+                <p className="m-2">{counter}</p>
+                <button className='btn btn-success' onClick={handMore}>+</button>
             </div>
             <div>
-                <button className='btn btn-success' onClick={handMore}>+</button>
-                <button className='btn btn-success' onClick={handLess}>-</button>
-                <button className='btn btn-success' onClick={handOnAdd}>Agregar</button>
+                <button className='btn btn-success' onClick={handOnAdd}>Agregar al carrito</button>
             </div>
         </div>
     )

@@ -1,0 +1,12 @@
+.NavBarBody{
+    background-color: black;
+}
+
+.NavBarTitle{
+    color:aliceblue !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+}
+
+.NBB{
+    margin: 5px;
+}

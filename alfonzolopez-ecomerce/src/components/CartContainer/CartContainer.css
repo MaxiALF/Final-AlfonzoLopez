@@ -1,0 +1,14 @@
+.CCB{
+    background-color: black;
+    text-align: center;
+    color: aliceblue;
+    width: 80%;
+    padding: 20px;
+    margin: 30px 20px 30px 20px;
+    border-radius: 30px;
+}
+
+.imgFix{
+    width: 250px;
+    height: 250px;
+}

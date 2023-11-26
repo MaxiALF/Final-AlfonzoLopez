@@ -1,0 +1,11 @@
+.cItem{
+    background-color: black !important;
+    width: 50%;
+    margin: 30px 15px 30px 15px;
+    color: aliceblue !important;
+    text-align: center;
+}
+
+h3{
+    color:darkred !important;
+}
