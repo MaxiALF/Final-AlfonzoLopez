@@ -12,11 +12,11 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         const dbFirestore = getFirestore()
         const queryDoc = doc(dbFirestore, 'Products', pid)
+
         getDoc(queryDoc)
         .then(result => setProduct({ id: result.id , ...result.data()})) 
-        .catch(error => console.log(error))
         .finally(() => setload(false))
-    },[])
+    },[pid])
 
     return (
         <div className="d-flex">

@@ -7,7 +7,7 @@ export const CartContainer = () => {
     const { cartList, deleteProduct, deleteCart, total, cartItemCount } = useCartContext() 
 
     return (
-        <div className="CCB mx-auto">
+        <div className="CCB m-5">
             <h2> Resumen de compra: </h2>
             { cartList.map(product => <div key={product.id} {...product}>
                                             <div class="table-responsive">
@@ -17,7 +17,7 @@ export const CartContainer = () => {
                                                             <td><img className="imgFix" src={product.img}/></td>
                                                             <td>---Producto: {product.name} </td> 
                                                             <td>---Precio: ${product.price} </td>
-                                                            <td>---Cantidad: {product.cant} --- </td>
+                                                            <td>---Cantidad: {product.quantity} --- </td>
                                                             <td><button onClick={() => deleteProduct (product)} className="btn btn-outline-danger">Eliminar</button></td>
                                                         </tr>
                                                     </tbody>

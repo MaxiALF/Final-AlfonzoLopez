@@ -2,9 +2,9 @@ import { useState } from "react"
 import { useCartContext } from "../../context/CartContext"
 import { addDoc, collection, getFirestore } from 'firebase/firestore'
 import { Link } from "react-router-dom"
-import './checkout.css'
+import './Checkout.css'
 
-const checkout = () => {
+const Checkout = () => {
 
     const { cartList, total, deleteCart } = useCartContext()
     const [ form, setForm ] = useState({ name:'', phone:'', email:''})
@@ -15,7 +15,7 @@ const checkout = () => {
 
             const order = {}
             order.buyer = form
-            order.items = cartList.map(product => ({ id: product.id, price: product.price, name: product.name, cant: product.cant }))
+            order.items = cartList.map(product => ({ id: product.id, price: product.price, name: product.name, quantity: product.quantity }))
             order.total = total()
 
         const db = getFirestore()
@@ -24,7 +24,6 @@ const checkout = () => {
 
         addDoc(queryCollection, order)
         .then(({ id }) => setOkId(id))
-        .catch(error => console.log(error))
         .finally(() => {setForm({ name:'', phone:'', email:'' }), deleteCart()} )
     }
 
@@ -35,23 +34,23 @@ const checkout = () => {
     return (
             <div className="mx-auto checkBody mt-5">
                 {okId === '' ?
-(                    <>
-                        <h2 className="mt-3 text-success"> Complete el siguiente formulario para finalizar con la compra </h2>
+                    (<>
+                        <h2 className="mt-3 text-danger"> Complete el siguiente formulario para finalizar con la compra </h2>
                         <form className="d-inline-block w-50" onSubmit={createOrder} >
                             <div className="mt-3">
-                            <label>Nombre</label>
-                            <input className="form-control m-2" type="text" name="name"  required onChange={ change } value={form.name}/>
+                                <label>Nombre</label>
+                                <input className="form-control m-2" type="text" name="name"  required onChange={ change } value={form.name}/>
                             </div>
                             <div>
-                            <label>telefono</label>
-                            <input className="form-control m-2" type="number" name="phone" required onChange={ change } value={form.phone}/>
+                                <label>telefono</label>
+                                <input className="form-control m-2" type="number" name="phone" required onChange={ change } value={form.phone}/>
                             </div>
                             <div>
-                            <label>Email</label>
-                            <input className="form-control m-2" type="email" name="email" required onChange={ change } value={form.email}/>
+                                <label>Email</label>
+                                <input className="form-control m-2" type="email" name="email" required onChange={ change } value={form.email}/>
                             </div>
-                            <div className="m-3">
-                            <button className="btn btn-outline-success">Confirmar compra</button>
+                                <div className="m-3">
+                                <button className="btn btn-outline-success">Confirmar compra</button>
                             </div>
                         </form>
                     </>)
@@ -60,7 +59,7 @@ const checkout = () => {
                         <div>
                             <h2 className="m-3 text-info"> El ID de su compra es : {okId} </h2>
                             <Link to='/'>
-                                <button className="btn btn-success m-3">Volver al inicio</button>
+                                <button className="btn btn-danger m-3">Volver al inicio</button>
                             </Link>
                         </div>
                     )
@@ -69,4 +68,4 @@ const checkout = () => {
     )
 }
 
-export default checkout
+export default Checkout

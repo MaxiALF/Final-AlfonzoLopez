@@ -5,9 +5,9 @@ import { collection, getDocs, getFirestore, query, where } from 'firebase/firest
 
 export const Loading = () => {
     return (
-        <div className="mx-auto m-5">
+        <div className="mx-auto m-5 text-light">
             <img src="/public/icons/Loading.gif"/>
-            <h2 className="text-info">Cargando, espere...</h2>
+            <h2>Cargando, espere...</h2>
         </div> 
     )
 }
@@ -20,14 +20,12 @@ function ItemListContainer ({greeting}) {
     useEffect(() => {
         const dbFirestore = getFirestore()
         const queryColletion = collection(dbFirestore, 'Products')
-        
         const qFilter = cid ? query(queryColletion, where('category', '==', cid )) : queryColletion
 
         getDocs(qFilter)
         .then(result => {setProducts(result.docs.map(product => ({ id: product.id , ...product.data() })))})
         .catch(error => console.log(error))
         .finally(() => setload(false))
-        
     }, [cid])
 
     return(

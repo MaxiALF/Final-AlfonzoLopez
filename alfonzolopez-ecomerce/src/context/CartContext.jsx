@@ -11,7 +11,7 @@ export const CartContextProvider = ({children}) => {
 
         if (cartList.find(item => item.id === product.id)){
             const products = cartList.map(item => 
-                item.id === product.id ? {...item, cant : item.cant + product.cant } : item)
+                item.id === product.id ? {...item, quantity : item.quantity + product.quantity } : item)
 
             return setCartlist([...products])
         }
@@ -24,13 +24,13 @@ export const CartContextProvider = ({children}) => {
         setCartlist(result) 
     }
     
-    const total = () => cartList.reduce((added, productObj) => added = added + (productObj.price * productObj.cant), 0 )
+    const total = () => cartList.reduce((added, productObj) => added = added + (productObj.price * productObj.quantity), 0 )
 
     const deleteCart = () => {
         setCartlist([])
     }
 
-    const cartItemCount = () => cartList.reduce((total, product) => total + product.cant, 0)
+    const cartItemCount = () => cartList.reduce((total, product) => total + product.quantity, 0)
     
     return(
         <CartContext.Provider value={{ cartList, addToCart, deleteProduct, deleteCart, total, cartItemCount }}>

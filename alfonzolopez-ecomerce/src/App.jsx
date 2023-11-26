@@ -5,8 +5,9 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContextProvider } from './context/CartContext';
 import { CartContainer } from './components/CartContainer/CartContainer';
-import Checkout from './components/checkout/checkout';
 import './App.css'
+import { Footer } from './components/Footer/Footer';
+import Checkout from './components/Checkout/Checkout';
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
               <Route path= '/category/:cid' element={<ItemListContainer greeting = 'todos nuestros productos'/>} />
               <Route path= '/detail/:pid' element={ <ItemDetailContainer />} />
               <Route path= '/cart' element={ <CartContainer />} />
-              <Route path= '/checkout' element={ <Checkout /> } />  
+              <Route path= '/checkout' element={ <Checkout/> } />  
               <Route path= '*' element={<h1>404 NOT FOUND</h1>} />
             </Routes> 
           </BrowserRouter>
+          <Footer/>
         </div>
         </CartContextProvider>
   ) 

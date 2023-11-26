@@ -6,6 +6,7 @@ export const ItemCount = ({initial=1, stock=12, onAdd}) => {
     const handOnAdd = () => {
         onAdd(counter)
     }
+    
     return(
         <div className="text-center">
             <div className="d-inline-flex m-2">
